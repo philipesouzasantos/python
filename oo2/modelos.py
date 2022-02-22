@@ -41,8 +41,29 @@ class Serie(Programa):
         return f'{self._nome} - {self.ano} - {self.temporadas} temporadas - {self._likes} Likes'
 
 
+class Playlist():
+    def __init__(self, nome, programas):
+        self.nome = nome
+        self._programas = programas
+
+    # torna a lista iteravel
+    def __getitem__(self, item):
+        return self._programas[item]
+
+    @property
+    def listagem(self):
+        return self._programas
+
+    # permite o uso do len(objeto)
+    def __len__(self):
+        return len(self._programas)
+
+
 vingadores = Filme('vingadores - guerra infinita', 2018, 160)
 atlanta = Serie('atlanta', 2018, 2)
+tmep = Filme('Todo mundo em pânico', 1999, 100)
+demolidor = Serie('Demolidor', 2016, 2)
+
 vingadores.dar_likes()
 vingadores.dar_likes()
 vingadores.dar_likes()
@@ -50,8 +71,16 @@ vingadores.dar_likes()
 atlanta.dar_likes()
 atlanta.dar_likes()
 
-filmes_e_series = [vingadores, atlanta]
+tmep.dar_likes()
+tmep.dar_likes()
+tmep.dar_likes()
 
-for programa in filmes_e_series:
+filmes_e_series = [vingadores, atlanta, demolidor, tmep]
+playlist_fim_de_semana = Playlist('fim de semana', filmes_e_series)
+print(f'Tamanho da minha playlist: {len(playlist_fim_de_semana)}')
+
+for programa in playlist_fim_de_semana:
     print(programa)
 
+# Como consultar se um objeto está numa lista?
+print(f'Demolidor está na playlist? {demolidor in playlist_fim_de_semana}')
